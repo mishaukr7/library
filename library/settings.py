@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'catalog.apps.CatalogConfig',
+    'home.apps.HomeConfig',
+    'reader.apps.ReaderConfig',
+    'forum.apps.ForumConfig',
 ]
 
 MIDDLEWARE = [
