@@ -1,7 +1,5 @@
 from django.db import models
-from datetime import date
 from django.urls import reverse
-# Create your models here.
 
 
 class Author(models.Model):
@@ -12,7 +10,7 @@ class Author(models.Model):
     date_of_death = models.DateField('died', null=True, blank=True)
     biography = models.TextField(max_length=1000)
     country = models.ForeignKey('Country', on_delete=models.SET_NULL, null=True)
-    photo = models.ImageField(upload_to='media/author_photo', blank=True)
+    photo = models.ImageField(upload_to='media/author_photo/', blank=True)
 
     class Meta:
         db_table = 'author'
@@ -54,14 +52,15 @@ class Book(models.Model):
     genre = models.ManyToManyField('Genre', help_text='Select genre to this book')
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
     is_free = models.BooleanField()
-    cover = models.ImageField(upload_to='media/book_cover', blank=True)
+    cover = models.ImageField(upload_to='media/book_cover/', blank=True)
+    date_add = models.DateField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse('author-detail', args=[str(self.id)])
+        return reverse('book_detail', args=[str(self.id)])
 
     class Meta:
         db_table = 'book'
-        ordering = ['-date_publication']
+        ordering = ['date_publication']
 
     def __str__(self):
         return self.title
