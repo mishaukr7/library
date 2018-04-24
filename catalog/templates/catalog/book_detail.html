@@ -1,0 +1,8 @@
+{% extends 'home/base.html' %}
+{% block page %}
+<h1> Title: {{object.title}} </h1>
+
+<p><strong>Author:</strong>><a href="{% url'author-detail' book.author.pk %}"> {{object.author}}</a></p>
+<p><strong>Date Publication</strong>{{object.date_publication}}
+<p><strong>Genre: </strong> {{object.genre}}
+{% endblock %}

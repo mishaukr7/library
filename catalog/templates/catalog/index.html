@@ -1,0 +1,8 @@
+{% extends 'home/base.html' %}
+{% block page %}
+    <article>
+    {% for book in book_list%}
+    <h1>{{book.title}}, {{book.date_add}}</h1>
+    {%endfor%}
+    </article>
+{% endblock %}

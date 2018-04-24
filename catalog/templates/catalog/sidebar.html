@@ -1,0 +1,71 @@
+{%load catalog_extras%}
+
+{%get_book as book_sidebar%}
+
+{%if book_sidebar%}
+ <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+<i class="fa fa-fw fa-wrench"></i>
+<span class="nav-link-text">Books</span>
+</a>
+<ul class="sidenav-second-level collapse" id="collapseComponents">
+	{% for book in book_sidebar %}
+<li>
+<a href="#">{{book}}</a>
+ </li>
+{%endfor%}
+<li>
+<a class="nav-link" href="#">
+<span class="nav-link-text">SEE MORE</span>
+</a>
+</li>
+
+{%endif%}
+</ul>
+</li>
+
+{%get_author as author_sidebar%}
+
+{%if author_sidebar%}
+<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExample" data-parent="#exampleAccordion">
+<i class="fa fa-fw fa-file"></i>
+<span class="nav-link-text">Authors</span>
+</a>
+<ul class="sidenav-second-level collapse" id="collapseExample">
+	{% for author in author_sidebar %}
+<li>
+<a href="#">{{author.last_name}} {{author.first_name}}</a>
+ </li>
+{%endfor%}
+<li>
+<a class="nav-link" href="#">
+<span class="nav-link-text">SEE MORE</span>
+</a>
+</li>
+{%endif%}
+</ul>
+</li>
+
+{%get_genre as genre_sidebar%}
+
+{%if genre_sidebar%}
+<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseGenre" data-parent="#exampleAccordion">
+<i class="fa fa-fw fa-file"></i>
+<span class="nav-link-text">Genres</span>
+</a>
+<ul class="sidenav-second-level collapse" id="collapseGenre">
+	{% for genre in genre_sidebar %}
+<li>
+<a href="#">{{genre}}</a>
+ </li>
+{%endfor%}
+<li>
+<a class="nav-link" href="#">
+<span class="nav-link-text">SEE MORE</span>
+</a>
+</li>
+{%endif%}
+</ul>
+</li>

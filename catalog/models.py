@@ -68,6 +68,7 @@ class Book(models.Model):
 
 class Genre(models.Model):
     name = models.CharField(max_length=100, help_text='Enter a book genre, e.g. Fantasy, Detective')
+    poster = models.ImageField(upload_to='media/genre_poster', blank=True)
 
     class Meta:
         db_table = 'genre'
