@@ -1,0 +1,17 @@
+{% extends 'home/base.html' %}
+{% block page %}
+    <article>
+    <h1>Authors</h1>
+    {% if author_list %}
+        <ul>
+      {% for author in author_list %}
+      <li>
+        <a href="{{ author.get_absolute_url }}">{{ author }}</a> ({{author.country}})
+      </li>
+      {% endfor %}
+        </ul>
+    {%else%}
+    <p>There are no books available. </p>
+    {% endif %}
+    </article>
+{% endblock %}

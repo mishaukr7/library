@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View, generic
+
+from PIL import Image
 # Create your views here.
 
 from .models import *
@@ -25,7 +27,7 @@ class BookListView(generic.ListView):
 
 
 class BookDetailView(generic.DetailView):
-    mode = Book
+    model = Book
 
 
 class AuthorListView(generic.ListView):
@@ -33,6 +35,15 @@ class AuthorListView(generic.ListView):
     paginate_by = 10
 
 
-class AuthorDetailView(View):
+class AuthorDetailView(generic.DetailView):
     model = Author
+
+
+class GenreListView(generic.ListView):
+    model = Genre
+    paginate_by = 10
+
+
+class GenreDetailView(generic.DetailView):
+    model = Genre
 

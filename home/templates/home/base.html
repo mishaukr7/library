@@ -13,6 +13,7 @@
   <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+   <link href="{% static 'css/featurettes.css' %}" rel="stylesheet">
 
 {% endblock %}
 
@@ -44,10 +45,6 @@
 
 
 {%include 'catalog/sidebar.html' %}
-
-
-
-
 
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
@@ -119,7 +116,7 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">Catalog</a>
+          <a href="{% url 'catalog:books' %}">Catalog</a>
         </li>
         <li class="breadcrumb-item active">Books</li>
       </ol>

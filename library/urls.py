@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
+from django.conf.urls.static import static
+from library import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', include('home.urls')),
     path('catalog/', include('catalog.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     #path('reader/', include('reader.urls')),
     #path('forum/', include('forum.urls')),
     path('admin/', admin.site.urls),
@@ -29,3 +33,6 @@ urlpatterns = [
 urlpatterns += [
     path('', RedirectView.as_view(url='/catalog', permanent=True))
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += staticfiles_urlpatterns()

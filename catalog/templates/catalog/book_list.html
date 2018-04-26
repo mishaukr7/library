@@ -1,17 +1,30 @@
+
+
+
+
 {% extends 'home/base.html' %}
 {% block page %}
-    <article>
+<div class="container marketing">
     <h1>Books</h1>
-    {% if book_list %}
-        <ul>
+        {% if book_list %}
+
+  <!-- Three columns of text below the carousel -->
         {% for book in book_list %}
-            <li>
-            <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
-            </li>
-        {% endfor %}
-        </ul>
+
+  <div class="row" >
+    <div class=" col-lg-4 col-xs-4 text-center width-200">
+    {% if book.cover %}
+      <img class="img" src="{{book.cover.url}}" width="200" height="300">
+{% endif %}
+      <p>{{book.title}}</p>
+      <p>{{book.author}}</p>
+      <p><a class="btn btn-default" href="{{ book.get_absolute_url }}">View details »</a></p>
+    </div>
+      {% endfor %}
     {%else%}
     <p>There are no books available. </p>
     {% endif %}
-    </article>
+  </div><!-- /.row -->
+</div>
+
 {% endblock %}
