@@ -1,1 +1,12 @@
 {% extends 'home/base.html' %}
+
+{% block content %}
+
+    <h1>user_profile Detail: {{ user_profile }}</h1>
+    <li>Birthday: {{ user_profile.email }}</li>
+    <li>website: {{ user_profile.bio }}</li>
+    <li>description: {{ user_profile.location }}</li>
+    <li>gender: {{ user_profile.birth_date }}</li>
+    <p><a href="/user/settings/account/{{ user_profile.username }}/">Edit Account</a></p>
+    <p><a href="/user/settings/profile/{{ user_profile.username }}/">Edit Profile</a></p>
+{% endblock %}

@@ -1,31 +1,21 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
-from library.accounts.forms import SignUpForm
-from django.contrib.auth import login, authenticate
 from .models import User
-from django.views import generic
-from django.urls import reverse
+from django.views.generic.edit import CreateView
+from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
+
 # Create your views here.
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()
-            user.profile.location = form.cleaned_data.get('location')
-            user.save()
-            raw_password = form.clean_password1('password1')
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
-            return redirect(reverse('books'))
-        else:
-            form = SignUpForm()
-        return render(request, 'registration/signup.html', {'form': form})
+class SignUpView(CreateView):
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')
+    model = User
+    fields = ('username', 'password', 'first_name', 'last_name', 'email')
+    #fields = ('bio', 'date_birth')
 
 
-class ProfileView(generic.DetailView):
+class ProfileDetailView(DetailView):
     model = User
     template_name = 'registration/profile.html'
+    slug_field = 'username'
+    context_object_name = 'user_profile'
