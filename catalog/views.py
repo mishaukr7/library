@@ -25,43 +25,38 @@ class SideBarView(View):
 
 class BookListView(generic.ListView):
     model = Book
-    paginate_by = 12
+    paginate_by = 18
     queryset = Book.objects.order_by('-date_add')
 
 
-class BookDetailView(generic.DetailView):
-    model = Book
+class BookDetailView(View):
+    template_name = 'catalog/book_detail.html'
+    comment_form = CommentForm
 
-
-class AuthorListView(generic.ListView):
-    model = Author
-    paginate_by = 10
-
-
-class AuthorDetailView(generic.DetailView):
-    model = Author
-
-
-class GenreListView(generic.ListView):
-    model = Genre
-    paginate_by = 10
-
-
-class GenreDetailView(generic.DetailView):
-    model = Genre
+    def get(self, request, *args, **kwargs):
+        book = get_object_or_404(Book, id=self.kwargs['book_id'])
+        context = {}
+        context.update(csrf(request))
+        user = auth.get_user(request)
+        context['book'] = book
+        context['comments'] = book.comment_set.all().order_by('path')
+        context['next'] = book.get_absolute_url()
+        if user.is_authenticated:
+            context['form'] = self.comment_form
+        return render(request, template_name=self.template_name, context=context)
 
 
 @login_required
 @require_http_methods(['POST'])
-def add_comment(request, book):
+def add_comment(request, book_id):
     form = CommentForm(request.POST)
-    book_id = get_object_or_404(Book, id=book)
+    book = get_object_or_404(Book, id=book_id)
 
     if form.is_valid():
         comment = Comment()
         comment.path = []
-        comment.book = book_id
-        comment.author = auth.get_user(request)
+        comment.book_id = book
+        comment.author_id = auth.get_user(request)
         comment.content = form.cleaned_data['comment_area']
         comment.save()
 
@@ -74,4 +69,30 @@ def add_comment(request, book):
         comment.save()
 
     return redirect(book.get_absolute_url())
+
+
+class AuthorListView(generic.ListView):
+    model = Author
+    paginate_by = 30
+    queryset = Author.objects.order_by('-last_name')
+
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+
+
+class GenreListView(generic.ListView):
+    model = Genre
+    paginate_by = 30
+
+
+class GenreDetailView(generic.DetailView):
+    model = Genre
+
+
+
+
+
+
+
 

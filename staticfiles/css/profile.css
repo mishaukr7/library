@@ -13,35 +13,9 @@ div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-html { overflow-y: scroll; }
-body { 
-  background: #f0f0f0; 
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #313131;
-  font-size: 62.5%; 
-  line-height: 1; 
-}
 
-::selection { background: #a4dcec; }
-::-moz-selection { background: #a4dcec; }
-::-webkit-selection { background: #a4dcec; }
 
-::-webkit-input-placeholder { /* WebKit browsers */
-  color: #ccc;
-  font-style: italic;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color: #ccc;
-  font-style: italic;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color: #ccc;
-  font-style: italic;
-}
-:-ms-input-placeholder { /* Internet Explorer 10+ */
-  color: #ccc !important;
-  font-style: italic;  
-}
+
 
 br { display: block; line-height: 2.2em; } 
 
@@ -76,7 +50,6 @@ img { border: 0; max-width: 100%; }
   transition: height 0.5s linear;
 }
 #topbar a {
-  color: #fff;
   font-size:1.3em;
   line-height: 1.25em;
   text-decoration: none;
@@ -95,7 +68,6 @@ h1 {
   letter-spacing: -0.05em;
   margin-bottom: 20px;
   padding: .1em 0;
-  color: #444;
 	position: relative;
 	overflow: hidden;
 	white-space: nowrap;
@@ -127,13 +99,11 @@ h1 > span {
 
 
 h2 {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 2.1em;
   line-height: 1.4em;
   letter-spacing: normal;
   margin-bottom: 20px;
   padding: .1em 0;
-  color: #444;
 	position: relative;
 	overflow: hidden;
 	white-space: nowrap;
@@ -145,25 +115,24 @@ p {
   font-size: 1.4em;
   line-height: 1.55em;
   margin-bottom: 22px;
-  color: #555;
 }
 
-a { color: #5a9352; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 .center { display: block; text-align: center; }
 
 /** page structure **/
 #w {
-  display: block;
-  width: 750px;
+  width: 1000px;
   margin: 0 auto;
   padding-top: 30px;
   padding-bottom: 45px;
+   background-color: #F5F5F5;
 }
 
 #content {
-  display: block;
+    display: block;
+
   width: 100%;
   background: #fff;
   padding: 25px 20px;
@@ -171,6 +140,7 @@ a:hover { text-decoration: underline; }
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+   background-color: #F5F5F5;
 }
 
 #userphoto {

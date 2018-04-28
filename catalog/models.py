@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
 
+
 class Author(models.Model):
 
     first_name = models.CharField(max_length=100)
@@ -63,7 +64,7 @@ class Book(models.Model):
 
     def get_absolute_url(self):
 
-        return reverse('catalog:book-detail', args=[str(self.id)])
+        return reverse('catalog:book', args=[str(self.id)])
 
     def __str__(self):
         return self.title
@@ -83,8 +84,8 @@ class Genre(models.Model):
 
 class Comment(models.Model):
     path = ArrayField(models.IntegerField())
-    author = models.ForeignKey(User, on_delete=models.PROTECT)
-    book = models.ForeignKey(Book, on_delete=models.PROTECT)
+    author_id = models.ForeignKey(User, on_delete=models.PROTECT)
+    book_id = models.ForeignKey(Book, on_delete=models.PROTECT)
     content = models.TextField('Comment', max_length=1000)
     pub_date = models.DateField('Date comments', auto_now_add=True)
 

@@ -12,14 +12,14 @@
         <li class="breadcrumb-item">
           <a href="#">Accounts</a>
         </li>
-        <li class="breadcrumb-item active">{{user_profile}}</li>
+        <li class="breadcrumb-item active">{{request.user}}</li>
       </ol>
 {%endblock%}
 
 {% block page %}
   <div id="w">
     <div id="content" class="clearfix">
-      <div id="userphoto"><img src="{{user_profile.profile.user_photo.url}}" alt="default avatar"></div>
+      <div id="userphoto"><img src="{{user_profile.profile.user_photo.url}}" weight="250px" height="300px"></div>
        {%if request.user == user_profile%}
       <h2><p>{{user_profile}}</p>(ONLINE)</h2>
       {%else%}
@@ -33,7 +33,9 @@
           <li><a href="#settings" class="sel">Information</a></li>
           <li><a href="#bio">About</a></li>
           <li><a href="#activity">Reviews</a></li>
+          {%if user_profile == request.user %}
           <li><a href="#friends">Setting</a></li>
+          {%endif%}
         </ul>
       </nav>
             <section id="settings">

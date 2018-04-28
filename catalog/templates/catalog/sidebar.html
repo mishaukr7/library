@@ -11,7 +11,7 @@
 <ul class="sidenav-second-level collapse" id="collapseComponents">
 	{% for book in book_sidebar %}
 <li>
-<a href="#">{{book}}</a>
+<a href="{{book.get_absolute_url}}">{{book}}</a>
  </li>
 {%endfor%}
 <li>
@@ -35,7 +35,7 @@
 <ul class="sidenav-second-level collapse" id="collapseExample">
 	{% for author in author_sidebar %}
 <li>
-<a href="#">{{author.last_name}} {{author.first_name}}</a>
+<a href="{{author.get_absolute_url}}">{{author.last_name}} {{author.first_name}}</a>
  </li>
 {%endfor%}
 <li>

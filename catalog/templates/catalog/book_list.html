@@ -1,7 +1,7 @@
 {% extends 'home/base.html' %}
 
 {%block titles %}
- <title>Books</title>
+ <title>Library|Books</title>
 {%endblock titles%}
   {% load bootstrap3 %}
 
@@ -193,17 +193,19 @@
 
 
 </style>
+
+
 <div class="container bootstrap snipets">
    <h1 class="text-center text-muted">Book catalog</h1>
-              <h1>&nbsp </h1>
 
    <div class="row flow-offset-1">
         {% if book_list %}
         {%for book in book_list%}
-     <div class="col-xs-6 col-md-4">
+     <div class="col-xs-6 col-md-3">
        <div class="product tumbnail thumbnail-3"><a href="{{book.get_absolute_url}}"><img src="{{book.cover.url}}" alt="{{book.title}}" width="200" height="300"></a>
          <div class="caption">
-           <h6><a href="{{book.get_absolute_url}}">{{book.title}}</a></h6><span class="price"> <a href="{{book.author.get_absolute_url}}">{{book.author}}</span>
+           <span class="price"> <a href="{{book.get_absolute_url}}">{{book.title}}</a></span>
+           <h6><a href="{{book.author.get_absolute_url}}">{{book.author}}</a></h6>
            <h6>&nbsp </h6>
          </div>
        </div>

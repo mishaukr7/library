@@ -1,46 +1,67 @@
-
 {% block head %}
+<head>
 {% load staticfiles%}
-{% load bootstrap3 %}
+{%block titles %}
+ <title>Library</title>
 
+{%endblock titles%}
+<link rel="shortcut icon" href="http://www.free-icons-download.net/images/book-icon-91381.png">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
  
-  <!-- Bootstrap core CSS-->
-  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" >
-  <!-- Custom fonts for this template-->
+{% load bootstrap3 %}
+{% bootstrap_css %}
+
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet" type="text/css" media="all">
+      <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
   <link href="{% static 'css/featurettes.css' %}" rel="stylesheet">
-  <link href="{% static 'css/profile.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
 
+  <style>
+body {
+	font-size: 1.6em;
 
-{%block titles %}
- <title>Library</title>
-{%endblock titles%}
+}
 
+.form-control {
+	font-size: 2rem;
+	line-height: 1;
+	padding: 0.375rem 2rem;
+}
+.btn {
+	line-height: 2;
+}
+.glyphicon {
+	line-height: 2.4;
+	
+}
+</style>
 
-
+</head>
 {% endblock %}
+
 
 {% block content %}
 
 {% block sidebar %}
+
+
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="{% url 'catalog:index' %}">LIBRARY</a>
+    <a class="navbar-brand" href="{% url 'catalog:index' %}"><p>LIBRARY</p></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
+
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="#">
+
             <i class="fa fa-fw fa-dashboard"></i>
+
             <span class="nav-link-text">Forum</span>
           </a>
         </li>
@@ -72,44 +93,41 @@
         </li>
       </ul>
 
+      <ul class="navbar-nav ml-left">
+<form action="" class="navbar-form navbar-left" method="get">
+    <div class="input-group">
+        <input id="search" name="q" type="text" class="form-control" placeholder="Поиск">
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">{% bootstrap_icon 'search' %}</button>
+        </span>
+    </div>
+</form>
+</ul>
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link" href="{%url 'login'%}">
+          <a class="nav-link" href="{%url 'accounts:user_profile' user%}">
             <span class="nav-link-text">ACCOUNT</span>
           </a>
         </li>
         <li class="nav-item dropdown">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="">
             <span class="nav-link-text">{{request.user}}</span>
           </a>
-
-
         </li>
-        <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0 mr-lg-2">
-            <div class="input-group">
-              <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-          </form>
-        </li>
+        <ul>
 
-
+  </li>
+</ul>
         
        <!-- SIGN IN, SIGN OUT-->
 
 
-        <li class="nav-item">
+        <li class="nav-item" href="{% url 'logout'%}">
           <a class="nav-link" data-toggle="modal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-
         </li>
                 <li class="nav-item" href="{% url 'login'%}">
           <a class="nav-link" data-toggle="modal" >
@@ -183,6 +201,9 @@ $(function(){
 });
 </script>
 
+{%block scripts%}
+
+{%endblock scripts%}
   </div>
   </body>
 
