@@ -1,7 +1,13 @@
 {% extends 'home/base.html' %}
+{%block titles %}
+ <title>Author profile</title>
+{%endblock titles%}
+
 {% block page %}
 <h1> Title: {{author}} </h1>
 
-<p><strong>Date Birthday</strong>{{object.date_of_birth}}
-<p><strong>COuntry: </strong> {{object.country}}
+<img src="{{author.photo.url}}" width="250" height="300"/>
+<p><strong>Date Birthday: </strong>{{author.date_of_birth}}
+<p><strong>Country: </strong> {{author.country}}
+
 {% endblock %}

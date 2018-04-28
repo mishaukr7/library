@@ -1,19 +1,29 @@
 
 {% block head %}
 {% load staticfiles%}
+{% load bootstrap3 %}
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Library</title>
+ 
   <!-- Bootstrap core CSS-->
-  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" >
   <!-- Custom fonts for this template-->
   <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
-   <link href="{% static 'css/featurettes.css' %}" rel="stylesheet">
+  <link href="{% static 'css/featurettes.css' %}" rel="stylesheet">
+  <link href="{% static 'css/profile.css' %}" rel="stylesheet" type="text/css" media="all">
+
+
+{%block titles %}
+ <title>Library</title>
+{%endblock titles%}
+
+
 
 {% endblock %}
 
@@ -73,7 +83,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
           <a class="nav-link" href="#">
-            <span class="nav-link-text">FORUM</span>
+            <span class="nav-link-text">{{request.user}}</span>
           </a>
 
 
@@ -101,7 +111,7 @@
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
 
         </li>
-                <li class="nav-item" href="{%url 'login'%}">
+                <li class="nav-item" href="{% url 'login'%}">
           <a class="nav-link" data-toggle="modal" >
             <i class="fa fa-fw fa-sign-in" href="{%url 'login'%}"></i>Login</a>
         </li>
@@ -111,6 +121,7 @@
 
 {% endblock sidebar%}
 
+{% block path%}
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -121,13 +132,18 @@
         <li class="breadcrumb-item active">Books</li>
       </ol>
 
+{%endblock path%}
 
 
 {% block page %}
 
+{% block comment%}
+
+{%endblock comment%}
 {% endblock page %}
 
- </div>
+</div>
+</div>
 {% endblock content %}
 
 
@@ -149,6 +165,23 @@
     <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
     <!-- Custom scripts for all pages-->
     <script src="{% static 'js/sb-admin.min.js' %}"></script>
+<script type="text/javascript">
+$(function(){
+  $('#profiletabs ul li a').on('click', function(e){
+    e.preventDefault();
+    var newcontent = $(this).attr('href');
+    
+    $('#profiletabs ul li a').removeClass('sel');
+    $(this).addClass('sel');
+    
+    $('#content section').each(function(){
+      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+    });
+    
+    $(newcontent).removeClass('hidden');
+  });
+});
+</script>
 
   </div>
   </body>

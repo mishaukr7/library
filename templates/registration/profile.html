@@ -1,12 +1,97 @@
 {% extends 'home/base.html' %}
 
-{% block content %}
+{%block titles %}
+ <title>Profile</title>
+{%endblock titles%}
 
-    <h1>user_profile Detail: {{ user_profile }}</h1>
-    <li>Birthday: {{ user_profile.email }}</li>
-    <li>website: {{ user_profile.bio }}</li>
-    <li>description: {{ user_profile.location }}</li>
-    <li>gender: {{ user_profile.birth_date }}</li>
-    <p><a href="/user/settings/account/{{ user_profile.username }}/">Edit Account</a></p>
-    <p><a href="/user/settings/profile/{{ user_profile.username }}/">Edit Profile</a></p>
+{%block path%}
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Accounts</a>
+        </li>
+        <li class="breadcrumb-item active">{{user_profile}}</li>
+      </ol>
+{%endblock%}
+
+{% block page %}
+  <div id="w">
+    <div id="content" class="clearfix">
+      <div id="userphoto"><img src="{{user_profile.profile.user_photo.url}}" alt="default avatar"></div>
+       {%if request.user == user_profile%}
+      <h2><p>{{user_profile}}</p>(ONLINE)</h2>
+      {%else%}
+		<h2>{{user_profile}}</h2> 
+		      <center>
+		<p>(Last seen: {{user_profile.last_login}})</p>
+		      </center>
+      {%endif%}
+      <nav id="profiletabs">
+        <ul class="clearfix">
+          <li><a href="#settings" class="sel">Information</a></li>
+          <li><a href="#bio">About</a></li>
+          <li><a href="#activity">Reviews</a></li>
+          <li><a href="#friends">Setting</a></li>
+        </ul>
+      </nav>
+            <section id="settings">
+        <p>Information:</p>
+        
+        <p class="setting"><span>E-mail: </span> {{user_profile.email}}</p>
+        
+        <p class="setting"><span>First Name: </span> {{user_profile.first_name}}</p>
+        
+        <p class="setting"><span>Last Name: </span> {{user_profile.last_name}}</p>
+        
+        <p class="setting"><span>Location: </span> {{user_profile.profile.location}}</p>
+        
+        <p class="setting"><span>Birth date: </span> {{user_profile.profile.birth_date}}</p>
+      </section>
+
+      <section id="bio" class='hidden'>
+        <p>{{user_profile.profile.bio}}</p>
+      </section>
+      
+      <section id="activity" class="hidden">
+        <p>Most recent actions:</p>
+        
+        <p class="activity">@10:15PM - Submitted a news article</p>
+        
+        <p class="activity">@9:50PM - Submitted a news article</p>
+        
+        <p class="activity">@8:15PM - Posted a comment</p>
+        
+        <p class="activity">@4:30PM - Added <strong>someusername</strong> as a friend</p>
+        
+        <p class="activity">@12:30PM - Submitted a news article</p>
+      </section>
+      
+      <section id="friends" class="hidden">
+        <p>Settings:</p>
+        
+
+      </section>
+      
+
+    </div><!-- @end #content -->
+  </div><!-- @end #w -->
+<script type="text/javascript">
+$(function(){
+  $('#profiletabs ul li a').on('click', function(e){
+    e.preventDefault();
+    var newcontent = $(this).attr('href');
+    
+    $('#profiletabs ul li a').removeClass('sel');
+    $(this).addClass('sel');
+    
+    $('#content section').each(function(){
+      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+    });
+    
+    $(newcontent).removeClass('hidden');
+  });
+});
+</script>
 {% endblock %}
