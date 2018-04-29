@@ -194,7 +194,6 @@
 
 </style>
 
-
 <div class="container bootstrap snipets">
    <h1 class="text-center text-muted">Book catalog</h1>
 
@@ -205,7 +204,7 @@
        <div class="product tumbnail thumbnail-3"><a href="{{book.get_absolute_url}}"><img src="{{book.cover.url}}" alt="{{book.title}}" width="200" height="300"></a>
          <div class="caption">
            <span class="price"> <a href="{{book.get_absolute_url}}">{{book.title}}</a></span>
-           <h6><a href="{{book.author.get_absolute_url}}">{{book.author}}</a></h6>
+           <h6><a href="{{book.author.get_absolute_url}}">by {{book.author}}</a></h6>
            <h6>&nbsp </h6>
          </div>
        </div>

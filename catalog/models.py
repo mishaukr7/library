@@ -23,7 +23,7 @@ class Author(models.Model):
         return reverse('catalog:author-detail', args=[str(self.id)])
 
     def __str__(self):
-        return '{0}, {1}'.format(self.last_name, self.first_name)
+        return '{0} {1}'.format(self.last_name, self.first_name)
 
 
 class Language(models.Model):
@@ -51,6 +51,7 @@ class Country(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
+    description = models.TextField(default='No description', blank=True)
     date_publication = models.DateField(null=True, blank=True)
     genre = models.ManyToManyField('Genre', help_text='Select genre to this book')
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
@@ -88,6 +89,9 @@ class Comment(models.Model):
     book_id = models.ForeignKey(Book, on_delete=models.PROTECT)
     content = models.TextField('Comment', max_length=1000)
     pub_date = models.DateField('Date comments', auto_now_add=True)
+
+    class Meta:
+        ordering = ['-pub_date']
 
     def get_offset(self):
         level = len(self.path) - 1

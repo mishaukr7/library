@@ -7,20 +7,61 @@
 {% block page %}
 
   <style>
-
+.div1 {
+	    width: 15%;
+    min-height: 150px;
+    float: left;
+}
+.div2 {
+	    width: 80%;
+    min-height: 150px;
+    margin-right: 20%;
+}
+.div3 {
+	width: 100%;
+}
+.div_comment {
+	margin: 2%;
+}
 
 </style>
 <h1> Title: {{book}} </h1>
+<div class="div1">
 <img src="{{book.cover.url}}" width="200" height="300"/>
-
+</div>
+<div class="div2">
 <p><strong>Author:</strong><a href="{{book.author.get_absolute_url }}"> {{book.author}}</a></p>
-<p><strong>Date Publication: </strong>{{book.date_publication}}
-<p><strong>Language: </strong> {{book.language}}
-
+<p><strong>Date Publication: </strong>{{book.date_publication}}</p>
+<p><strong>Language: </strong> {{book.language}}</p>
+<p><strong>GENRES: </strong> {{book.genre.name}}</p>
+<p><strong>Description: </strong></p> <p style="font-size: 14;">{{book.description}}</p>
+</div>
+</div>
+<div class="div3">
+<h1>COMMENTS</h1>
+</div>
 {%block comment%}
-
+<div class="div_comment">
 {% load bootstrap3 %}
-
+    {% if form %}
+        <h3 id="write_comment"><a onclick="return show_comments_form('write_comment')">Write comment</a></h3>
+        <form id="comment_form" action="{% url 'catalog:add_comment' book.id%}" method="post" >
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">{% bootstrap_icon "comment" %}&nbsp;&nbsp;Send</button>
+        {% endbuttons %}
+        </form>
+    {% else %}
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Comments</h3>
+            </div>
+            <div class="panel-body">
+                Only login user can add comments..<br />
+            </div>
+        </div>
+    {% endif %}
   {% for comment in comments %}
         <a name="comment-{{ comment.id }}"></a>
         <div class="row" id="{{ comment.id }}" >
@@ -42,25 +83,8 @@
             </div>
         </div>
     {% endfor %}
-    {% if form %}
-        <h3 id="write_comment"><a onclick="return show_comments_form('write_comment')">Write comment</a></h3>
-        <form id="comment_form" action="{% url 'catalog:add_comment' book.id%}" method="post" >
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary">{% bootstrap_icon "comment" %}&nbsp;&nbsp;Send</button>
-        {% endbuttons %}
-        </form>
-    {% else %}
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h3 class="panel-title">Комментарии</h3>
-            </div>
-            <div class="panel-body">
-                Только авторизованные пользователи могут оставлять комментарии.<br />
-            </div>
-        </div>
-    {% endif %}
+
+</div>
 </div>
 {%endblock comment%}
 {% endblock page%}

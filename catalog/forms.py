@@ -1,5 +1,6 @@
 from django import forms
-from .models import Comment
+from .models import *
+from django.contrib.auth.forms import UserCreationForm
 
 
 class CommentForm(forms.Form):
@@ -11,3 +12,4 @@ class CommentForm(forms.Form):
         label='',
         widget=forms.Textarea
     )
+
