@@ -109,6 +109,26 @@ class Comment(models.Model):
         return self.content[0:200]
 
 
+class BookmarkBase(models.Model):
+    class Meta:
+        abstract = True
+    user = models.ForeignKey(User, verbose_name='user')
+    date_create = models.DateTimeField(auto_now_add=True, verbose_name='date_add')
+
+    def __str__(self):
+        return self.user.username
+
+
+class BookBookmark(BookmarkBase):
+    obj = models.ForeignKey(Book, verbose_name='book')
+
+    class Meta:
+        db_table = 'bookmark_book'
+        ordering = ['date_create']
+
+    def get_bookmarks_count(self):
+        return self.bookbookmark_set().all().count
+
 
 
 

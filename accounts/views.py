@@ -5,7 +5,10 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from .forms import RegistrationForm
-
+import json
+from django.views import View
+from django.contrib import auth
+from django.http import HttpResponse
 # Create your views here.
 
 
@@ -23,6 +26,22 @@ class ProfileDetailView(DetailView):
     context_object_name = 'user_profile'
 
 
+class BookmarkView(View):
+    model = None
+
+    def post(self, requset, pk):
+        user = auth.get_user(requset)
+        bookmark, created = self.model.objects.get_or_create(user=user, obj_id=pk)
+
+        if not created:
+            bookmark.delete()
+        return HttpResponse(
+            json.dumps({
+                "result": created,
+                "count": self.model.objects.filter(obj_id=pk).count()
+            }),
+            content_type='application/json'
+        )
 
 
 
